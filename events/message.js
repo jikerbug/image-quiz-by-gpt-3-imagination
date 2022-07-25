@@ -2,7 +2,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders'); 
 const url = 'https://train-bfwduo1j45469v5ok3wc-gpt2-train-teachable-ainize.endpoint.ainize.ai/predictions/gpt-2-ko-small-finetune'
 
-
 var request = require('request');
 var startLyricsOption = 'startlyrics';
 var lengthLyricsOption = 'lengthlyrics';
@@ -45,18 +44,24 @@ async function getLyrics(text, length) {
   }
 
 
+
 module.exports = {
 	name: 'messageCreate',
 	async execute(message) {
-        if (!message.content.startsWith(';') || message.author.bot)
+    if (message.author.bot || !message.content.endsWith('?'))
 			return;
 		console.log(`Message from ${message.author.tag} in #${message.channel.name} : ${message.content}`);
 
+      var { userQuizDict } = require('./../commands/quiz');
+      console.log(userQuizDict)
+      var animal = userQuizDict[`${message.author.tag}`]['animal']
+      console.log(animal)
 
-        var length = 30;
-        var body = await getLyrics(message.content.substring(1) ,length);
-        lyrics = processLyrics(body)
-        message.reply(lyrics);
+      if(message.content.toLowerCase().includes(animal)){
+        message.react('⭕');
+      }else{
+        message.react('❌');
+      }
 	},
 };
 

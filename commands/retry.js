@@ -1,32 +1,25 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageAttachment, MessageEmbed } = require('discord.js');
-
-
-// const url = "https://main-dalle-server-scy6500.endpoint.ainize.ai/generate"
-const url = "https://hf.space/embed/multimodalart/latentdiffusion/+/api/predict/"
-var request = require('request');
-var getDrawing = require('../functions/getDrawing');
-var randomQuiz = require('../functions/randomQuiz');
-
-
-var userQuizDict = {
-
-};
+var getDrawing = require('../functions/getDrawing')
 
 module.exports = {
-  userQuizDict,
   data: new SlashCommandBuilder()
-    .setName('quiz')
-    .setDescription('Replies with ai generated animal quiz by drawing it in many different ways')
+    .setName('retry')
+    .setDescription('Replies with another ai generated animal quiz. same way as previous one')
                                     ,
-  async execute(interaction) {
-        console.log(interaction.user.tag)
-
-        //await interaction.reply("body");
+  async execute(interaction) {  
+        var user = interaction.user.tag
+        var { userQuizDict } = require('./../commands/quiz');
+        const quizDict = userQuizDict[user]
+        if(typeof quizDict === 'undefined'){
+            interaction.reply('get Quiz First!!');
+            return;
+        }
+        console.log(user)
         await interaction.deferReply()
-
-
-        const quizDict = randomQuiz();
+        
+        quizDict['retry'] += 1
+        console.log(quizDict)
 
         var base64Data = await getDrawing(quizDict["description"]);
   
