@@ -1,63 +1,26 @@
 
-const { SlashCommandBuilder } = require('@discordjs/builders'); 
-const url = 'https://train-bfwduo1j45469v5ok3wc-gpt2-train-teachable-ainize.endpoint.ainize.ai/predictions/gpt-2-ko-small-finetune'
-
-var request = require('request');
-var startLyricsOption = 'startlyrics';
-var lengthLyricsOption = 'lengthlyrics';
-
-
-function processLyrics(body){
-    body = body.slice(1,-1);
-    var words = body.split('\\n');
-    var lyrics = "";
-    for(let i = 0; i < words.length; i++){
-        lyrics += words[i];
-        lyrics += " ";
-    }
-
-    return lyrics;
-}
-
-async function getLyrics(text, length) {
-    const options = {
-        headers: {'content-type' : 'application/json'},
-        url:     url,
-        body:    JSON.stringify({
-          'text': text,
-          'num_samples': 1,
-          'length': length
-        })
-      };
-  
-    // Return new promise
-    return new Promise(function(resolve, reject) {
-      // Do async job
-      request.post(options, function(err, resp, body) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(body);
-        }
-      })
-    })
-  }
-
-
 
 module.exports = {
 	name: 'messageCreate',
 	async execute(message) {
-    if (message.author.bot || !message.content.endsWith('?'))
+    if (message.author.bot || !(message.content.endsWith("?") || message.content.includes('!')) )
 			return;
+    
 		console.log(`Message from ${message.author.tag} in #${message.channel.name} : ${message.content}`);
 
       var { userQuizDict } = require('./../commands/quiz');
-      console.log(userQuizDict)
-      var animal = userQuizDict[`${message.author.tag}`]['animal']
-      console.log(animal)
+      
+      var user = message.author.tag;
+      const quizDict = userQuizDict[user]
+      if(typeof quizDict === 'undefined'){
+          message.reply('get Quiz First!!');
+          return;
+      }
+      var animal = quizDict['animal']
+      var answer = message.content;
 
-      if(message.content.toLowerCase().includes(animal)){
+
+      if(answer.toLowerCase().includes(animal)){
         message.react('⭕');
       }else{
         message.react('❌');
