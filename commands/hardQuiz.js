@@ -10,11 +10,10 @@ var randomQuiz = require('../functions/randomQuiz');
 var userQuizDict = require('../functions/randomQuiz');
 
 
-
 module.exports = {
   userQuizDict,
   data: new SlashCommandBuilder()
-    .setName('quiz')
+    .setName('hard-quiz')
     .setDescription('Replies with ai generated animal quiz by drawing it in many different ways')
                                     ,
   async execute(interaction) {
@@ -24,7 +23,7 @@ module.exports = {
         await interaction.deferReply()
 
 
-        const quizDict = randomQuiz('normal');
+        const quizDict = randomQuiz('hard');
 
         var base64Data = await getDrawing(quizDict["description"]);
   

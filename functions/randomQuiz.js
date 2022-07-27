@@ -1,29 +1,36 @@
 
-var animalList = ['lion', 'peacock', 'giraffe', 'chicken', 'elephant', 'deer', 'turtle',
-                  'whale', 'penguin', 'shark', 'wolf', 'crocodile', 'cat', 'dog', 'fish',
-                  'sheep', 'horse', 'bear', 'goat', 'zebra', 'dolphin', 'fox', 
-                  'parrot', 'rabbit', 'frog', 'swan', 'flamingo'
+var animalList = ['lion', 'elephant', 'deer',
+                   'penguin', 'shark', 'cat',
+                  'sheep', 'bear', 'goat', 'dolphin', 'fox', 'rabbit', 'swan'
                   ]
 var styleList = ['pictogram', 'triangular geometrical', 'doodle', 'abstract', 
-                  '8bit pixel art', 'shadow', 'alien', 'cyberpunk robot', 'stained glass', 
-                  'felt art', 'keith haring', 'lego', 'mysterious haunted'
+                  '8bit pixel art', 'alien', 'cyberpunk robot', 'stained glass', 
+                  'felt art', 'keith haring', 'lego', 'rectangular geometrical', 'line geometrical',
                 ]
-var objectList = ['car', 'kettle', 'earring', 'shadow', 'teapot', 'papercraft', 'ring', 'necklace',
-                  'bottle', 'wallet', 'cap'
+var objectList = ['car', 'kettle', 'earring', 'teapot', 'papercraft', 'ring', 'necklace',
+                  'bottle'
                   ]
-var specialList = ['without effort', 'vector image']
-var scribbledList = ['chalk', 'pencil', 'crayon']
+
+// var objectList = [ 'earring', 'ring', 'necklace']
+var specialOptionList = ['vector image', 'Adobe Illustration Sticker Svg', 'made of gold', 'oil on canvas', 'made of silver'
+, 'scribbled with chalk', 'scribbled with pencil'
+  ]
+
+
+var userQuizDict = {
+
+};
 
  
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-module.exports = function randomQuiz(){
+module.exports = function randomQuiz(mode){
   var description;
   var quiz;
   var animal = animalList[getRandomInt(animalList.length)];
-  switch(getRandomInt(3)) {
+  switch(getRandomInt(2)) {
     case 0: // style
       var style = styleList[getRandomInt(styleList.length)];
       description = animal + ", in " + style + " style"
@@ -40,6 +47,12 @@ module.exports = function randomQuiz(){
       description = animal + " shaped " + object + ", in " + style + " style"
       break
   }
+
+  if(mode == 'hard'){
+    var specialOption = specialOptionList[getRandomInt(specialOptionList.length)];
+    description += ', ' + specialOption
+
+  } 
 
   quiz = description.replace(animal, "X")
 

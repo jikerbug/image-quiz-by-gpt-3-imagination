@@ -20,8 +20,16 @@ module.exports = {
       var answer = message.content;
 
 
+      var { userScoreDict } = require('./../functions/score');
+      var user = message.author.tag;
+      const scoreDict = userScoreDict[user]
+      if(typeof scoreDict === 'undefined'){
+          userScoreDict[user] = 0
+      }
       if(answer.toLowerCase().includes(animal)){
         message.react('⭕');
+        userScoreDict[user] += 10;
+        message.reply('you get a 10 point. Total Point is ' + userScoreDict[user])
       }else{
         message.react('❌');
       }

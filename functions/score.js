@@ -1,0 +1,6 @@
+
+
+userScoreDict = {}
+module.exports = {
+    userScoreDict,
+}

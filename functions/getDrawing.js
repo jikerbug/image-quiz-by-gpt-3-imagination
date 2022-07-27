@@ -8,7 +8,7 @@ module.exports = async function getDrawing(text) {
         headers: {'content-type' : 'application/json'},
         url:     url,
         body:    JSON.stringify(  {
-              "data": [text, 45, '256', '256', 1, 5]
+              "data": [text, 50, '256', '384', 2, 5]
           
             }),
     }
