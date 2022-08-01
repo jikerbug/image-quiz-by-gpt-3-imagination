@@ -1,10 +1,15 @@
 
-var animalList = ['lion', 'elephant', 'deer',
-                   'penguin', 'shark', 'cat',
-                  'sheep', 'bear', 'goat', 'dolphin', 'fox', 'rabbit', 'swan'
+const getImagination = require('./imagine')
+
+
+
+var animalList = ['lion', 'elephant', 'deer', 'giraffe', 'otter','chipmonk', 'peacock', 'owl', 'wolf', 'frog',
+                   'penguin', 'shark', 'cat', 'parrot', 'zebra', 'whale', 'turtle', 'sheep', 'dog', 'chicken', 'crocodile',
+                  'sheep', 'bear', 'goat', 'dolphin', 'fox', 'rabbit', 'swan', 'tiger', 'raccoon', 'hedgehog', 'flamingo', 'beaver',
+                  'kangaroo', 'buffalo', 'peacock', 'sloth', 'poodle', 'rhino', 'camel'
                   ]
-var styleList = ['pictogram', 'triangular geometrical', 'doodle', 'abstract', 
-                  '8bit pixel art', 'alien', 'cyberpunk robot', 'stained glass', 
+var styleList = ['pictogram', 'triangular geometrical', 'doodle', 'abstract', 'cartoon',
+                  '8bit pixel art', 'alien', 'cyberpunk robot', 'stained glass', 'pop art', 'van gogh',
                   'felt art', 'keith haring', 'lego', 'rectangular geometrical', 'line geometrical',
                 ]
 var objectList = ['car', 'kettle', 'earring', 'teapot', 'papercraft', 'ring', 'necklace',
@@ -21,12 +26,13 @@ var userQuizDict = {
 
 };
 
+
  
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-module.exports = function randomQuiz(mode){
+module.exports = async function randomQuiz(mode){
   var description;
   var quiz;
   var animal = animalList[getRandomInt(animalList.length)];
@@ -54,7 +60,17 @@ module.exports = function randomQuiz(mode){
 
   } 
 
-  quiz = description.replace(animal, "X")
+
+  //
+  var body = await getImagination(animal);
+  var json = JSON.parse(body)
+  var imagine = await json["choices"][0]["text"]; 
+  description = animal + imagine
+  if(mode == 'style'){
+    description = description + ", in " + styleList[getRandomInt(styleList.length)] + " style"
+  }
+  quiz = description.replace(animal, "X");
+  //
 
   quizDict = {"description": description, "quiz":quiz, "animal":animal, "retry":0}
 
