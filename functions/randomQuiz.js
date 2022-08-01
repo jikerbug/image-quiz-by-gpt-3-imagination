@@ -1,23 +1,23 @@
 
-const getImagination = require('./imagine')
+const {getImagination} = require('./getText')
 
 
 
-var animalList = ['lion', 'elephant', 'deer', 'giraffe', 'otter','chipmonk', 'peacock', 'owl', 'wolf', 'frog',
+const animalList = ['lion', 'elephant', 'deer', 'giraffe', 'otter','chipmonk', 'peacock', 'owl', 'wolf', 'frog',
                    'penguin', 'shark', 'cat', 'parrot', 'zebra', 'whale', 'turtle', 'sheep', 'dog', 'chicken', 'crocodile',
                   'sheep', 'bear', 'goat', 'dolphin', 'fox', 'rabbit', 'swan', 'tiger', 'raccoon', 'hedgehog', 'flamingo', 'beaver',
                   'kangaroo', 'buffalo', 'peacock', 'sloth', 'poodle', 'rhino', 'camel'
                   ]
-var styleList = ['pictogram', 'triangular geometrical', 'doodle', 'abstract', 'cartoon',
+const styleList = ['pictogram', 'triangular geometrical', 'doodle', 'abstract', 'cartoon',
                   '8bit pixel art', 'alien', 'cyberpunk robot', 'stained glass', 'pop art', 'van gogh',
                   'felt art', 'keith haring', 'lego', 'rectangular geometrical', 'line geometrical',
                 ]
-var objectList = ['car', 'kettle', 'earring', 'teapot', 'papercraft', 'ring', 'necklace',
+const objectList = ['car', 'kettle', 'earring', 'teapot', 'papercraft', 'ring', 'necklace',
                   'bottle'
                   ]
 
 // var objectList = [ 'earring', 'ring', 'necklace']
-var specialOptionList = ['vector image', 'Adobe Illustration Sticker Svg', 'made of gold', 'oil on canvas', 'made of silver'
+const specialOptionList = ['vector image', 'Adobe Illustration Sticker Svg', 'made of gold', 'oil on canvas', 'made of silver'
 , 'scribbled with chalk', 'scribbled with pencil'
   ]
 
@@ -62,12 +62,12 @@ module.exports = async function randomQuiz(mode){
 
 
   //
-  var body = await getImagination(animal);
-  var json = JSON.parse(body)
-  var imagine = await json["choices"][0]["text"]; 
+  var imagine = await getImagination(animal);
   description = animal + imagine
   if(mode == 'style'){
     description = description + ", in " + styleList[getRandomInt(styleList.length)] + " style"
+  }else if(mode == 'drawing'){
+    description = "A painting of " + description;
   }
   quiz = description.replace(animal, "X");
   //

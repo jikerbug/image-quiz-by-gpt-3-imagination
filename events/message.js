@@ -1,10 +1,20 @@
 
+const { getTalk } = require('../functions/getText')
 
 module.exports = {
 	name: 'messageCreate',
 	async execute(message) {
-    if (message.author.bot || !(message.content.endsWith("?") || message.content.includes('!')) )
-			return;
+    const content = message.content
+    if(message.author.bot)
+      return;
+    
+    var response = await getTalk(content);
+    if(response == ''){
+      response = '.'
+    }
+    message.reply(response)
+
+    return;
     
 		console.log(`Message from ${message.author.tag} in #${message.channel.name} : ${message.content}`);
 

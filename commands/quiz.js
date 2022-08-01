@@ -24,7 +24,7 @@ module.exports = {
         await interaction.deferReply()
 
 
-        const quizDict = await randomQuiz('style');
+        const quizDict = await randomQuiz('drawing');
 
         var base64Data = await getDrawing(quizDict["description"]);
   
