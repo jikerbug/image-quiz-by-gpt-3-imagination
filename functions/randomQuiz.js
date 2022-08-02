@@ -1,16 +1,20 @@
 
-const {getImagination} = require('./getText')
+const {getImagination} = require('./getText');
+const {animalDict} = require('../emojis.json');
 
 
+let animalList = []
+for (let x in animalDict) {
+  animalList.push(animalDict[x])
+}
 
-const animalList = ['lion', 'elephant', 'deer', 'giraffe', 'otter','chipmonk', 'peacock', 'owl', 'wolf', 'frog',
-                   'penguin', 'shark', 'cat', 'parrot', 'zebra', 'whale', 'turtle', 'sheep', 'dog', 'chicken', 'crocodile',
-                  'sheep', 'bear', 'goat', 'dolphin', 'fox', 'rabbit', 'swan', 'tiger', 'raccoon', 'hedgehog', 'flamingo', 'beaver',
-                  'kangaroo', 'buffalo', 'peacock', 'sloth', 'poodle', 'rhino', 'camel'
-                  ]
-const styleList = ['pictogram', 'triangular geometrical', 'doodle', 'abstract', 'cartoon',
-                  '8bit pixel art', 'alien', 'cyberpunk robot', 'stained glass', 'pop art', 'van gogh',
-                  'felt art', 'keith haring', 'lego', 'rectangular geometrical', 'line geometrical',
+animalList = new Set(animalList);
+animalList = [...animalList];
+
+
+const styleList = ['pictogram', 'triangular geometrical', 'doodle', 'abstract',
+                  '8bit pixel art', 'alien', 'cyberpunk robot', 'stained glass', 'pop art', 'van gogh', 'Art Nouveau posters',
+                  'felt art', 'keith haring', 'lego', 'rectangular geometrical', 'line geometrical', 'ancient Egyptian statues'
                 ]
 const objectList = ['car', 'kettle', 'earring', 'teapot', 'papercraft', 'ring', 'necklace',
                   'bottle'
@@ -69,10 +73,10 @@ module.exports = async function randomQuiz(mode){
   }else if(mode == 'drawing'){
     description = "A painting of " + description;
   }
-  quiz = description.replace(animal, "X");
+  quiz = description.replaceAll(animal, "X");
   //
 
-  quizDict = {"description": description, "quiz":quiz, "animal":animal, "retry":0}
+  quizDict = {"description": description, "quiz":quiz, "animal":animal, "retry":0, "failCnt":0}
 
   return quizDict;
 

@@ -4,11 +4,14 @@ const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 const { listenerCount } = require('node:process');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
+});
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+
 
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);

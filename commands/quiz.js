@@ -40,8 +40,7 @@ module.exports = {
             .setColor("#5104DB")
             .setFooter({ text: "drew by Mark in Mars" })
             .setTimestamp();
-          interaction.followUp({files: [drawing], embeds: [embed]});
-       
+          await interaction.followUp({files: [drawing], embeds: [embed]});
           userQuizDict[`${interaction.user.tag}`] = quizDict
           console.log(userQuizDict)
  
