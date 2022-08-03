@@ -36,12 +36,13 @@ module.exports = {
           const drawing = new MessageAttachment("out.png");
         
           const embed = new MessageEmbed()
-            .setDescription('quiz : ' + quizDict["quiz"])
+            .setDescription('Quiz : <Guess X! Choose an animal emoji for X>\n' + quizDict["quiz"])
             .setColor("#5104DB")
             .setFooter({ text: "drew by Mark in Mars" })
             .setTimestamp();
           interaction.followUp({files: [drawing], embeds: [embed]});
-       
+          const message = await interaction.fetchReply();
+		      message.react('❤️');
           userQuizDict[`${interaction.user.tag}`] = quizDict
           console.log(userQuizDict)
  

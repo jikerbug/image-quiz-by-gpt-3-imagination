@@ -12,7 +12,7 @@ module.exports = {
         var { userQuizDict } = require('./../commands/quiz');
         const quizDict = userQuizDict[user]
         if(typeof quizDict === 'undefined'){
-            interaction.reply('get Quiz First!!');
+            interaction.reply('get new Quiz First!!');
             return;
         }
         console.log(user)
@@ -31,12 +31,13 @@ module.exports = {
           const drawing = new MessageAttachment("out.png");
         
           const embed = new MessageEmbed()
-            .setDescription('quiz : ' + quizDict["quiz"])
+            .setDescription('Quiz : <Guess X! Choose an animal emoji for X>\n' + quizDict["quiz"])
             .setColor("#5104DB")
             .setFooter({ text: "drew by Mark in Mars" })
             .setTimestamp();
           interaction.followUp({files: [drawing], embeds: [embed]});
-       
+          const message = await interaction.fetchReply();
+		      message.react('❤️');
           userQuizDict[`${interaction.user.tag}`] = quizDict
           console.log(userQuizDict)
  

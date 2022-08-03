@@ -36,10 +36,10 @@ animalList = [...animalList];
 // `
 const styleList = ['pictogram', 'triangular geometrical', 'doodle', 'abstract', 'matisse', 'retro', 'dreamlike', 'minimalism',
                   '8bit pixel art', 'alien', 'cyberpunk robot', 'stained glass', 'pop art', 'van gogh', 'Art Nouveau posters',
-                  'felt art', 'keith haring', 'lego', 'rectangular geometrical', 'line geometrical', 'ancient Egyptian', 'enamel',
+                  'keith haring', 'lego', 'rectangular geometrical', 'line geometrical', 'ancient Egyptian', 'enamel', 'picasso',
                   'impressionism', 'funk art', 'solarpunk', 'futuristic', 'kandinsky', 'isometric digital art', 'Dalí', '3D',
                   'zentangle', 'Tiffany', 'peacock pattern', 'surrealistic', 'glitch art', '70s science fiction novel cover'
-                ]
+                ];
 
 var userQuizDict = {
 

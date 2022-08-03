@@ -32,7 +32,15 @@ const designerPromptExampleList =[
   `1. otter shaped chess set with a board that is made of water, and pieces that are otters in different positions.
   2. rhino shaped tank with a horn that is a gun, and armor that is made of different kinds of metal.
   3. giraffe shaped tower with a neck that is a spiral staircase, and spots that are windows.
-  4. giraffe shaped keyboard with a long neck and big eyes, inspired by ancient sculptures.`
+  4. giraffe shaped keyboard with a long neck and big eyes, inspired by ancient sculptures.
+  5. zebra shaped ziploc bag with stripes that are made of different colors and patterns, inspired by traditional african art.
+  6. sloth shaped coffee mug with a handle that is a branch, and leaves on the sides.
+  7. deeer shaped vase with a glass body, and antlers that are branches with leaves.
+  8. shark shaped lamp with a shade that is made of teeth, and a fin that doubles as a switch.
+  9. blowfish shaped lightbulb with a shade that is made of different colored glass, and a X inside the shade that lights up when the lamp is turned on.
+  10. koala shaped pencil case with leaves as pockets, and a eucalyptus tree as the zipper.
+  11. `,
+  `1. cat shaped mug, made of clay,`
 ]
 
 
@@ -78,7 +86,7 @@ module.exports = {
     })
   },
   async getImagination(animal) {
-    const prompt = description + '\n' + designerPromptExampleList[getRandomInt(2)] + animal;
+    const prompt = description + '\n' + designerPromptExampleList[getRandomInt(3)] + animal;
     console.log(prompt)
     const options = {
         headers: {'content-type' : 'application/json', 'Authorization': 'Bearer ' + apikey, 'OpenAI-Organization': OrganizationID},

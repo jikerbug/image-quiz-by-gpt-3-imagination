@@ -21,8 +21,16 @@ module.exports = async function getDrawing(text) {
         if (err) {
           reject(err);
         } else {
-          body = JSON.parse(body)
-          var base64Data = await body["data"][0]
+          //여기서 제대로 못받았을 경우 봇이 꺼지지 않도록 오류처리 할 수 있어야함 (100번중에 한번정도 발생?(이거 포함 3번정도 봄) 원인불명... 서버쪽 오류?...)
+          /*/Users/jibaek/markinmars/functions/getDrawing.js:26
+          base64Data = base64Data.replace(/^data:image\/png;base64,/, "");
+          TypeError: Cannot read properties of null (reading 'replace')
+              at Request._callback (/Users/jibaek/markinmars/functions/getDrawing.js:26:35)
+              at processTicksAndRejections (node:internal/process/task_queues:96:5)
+          (base) jibaek@jibaekui-MacBookPro markinmars % 
+          */
+          body = JSON.parse(body);
+          var base64Data = await body["data"][0];
           base64Data = base64Data.replace(/^data:image\/png;base64,/, "");
           resolve(base64Data);
         }

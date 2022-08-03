@@ -26,7 +26,7 @@ module.exports = {
         const emoji = reaction.emoji.name;
         if(emoji == '❌' ||emoji == '💩' ||emoji == '☠️' || emoji == '⭕'){
           return;
-        }else if(emoji =='👍' || emoji == '❤️' || emoji == '♥️'){
+        }else if(emoji =='👍' || emoji == '❤️' || emoji == '♥️' || emoji == '😿' || emoji == '😻'){
           return;
         }
 
@@ -42,6 +42,7 @@ module.exports = {
         
         if(emoji == '❓' || emoji == '❔'){
           reaction.message.react(quizDict['emoji']);
+          reaction.message.react('😿');
           delete userQuizDict[user];
           return;
         }
@@ -59,6 +60,7 @@ module.exports = {
         if(userAnswer == animal){
           reaction.message.react('⭕');
           reaction.message.react(emoji);
+          reaction.message.react('😻');
           userScoreDict[user] += 10;
           reaction.message.reply(user+ ' get a 10 point. Total Point is ' + userScoreDict[user]);
           delete userQuizDict[user];
@@ -73,6 +75,7 @@ module.exports = {
           }else{
             reaction.message.react('☠️');
             reaction.message.react(quizDict['emoji']);
+            reaction.message.react('😿');
             delete userQuizDict[user];
           }
         }
