@@ -1,4 +1,4 @@
-const {animalDict} = require('../emojis.json');
+const { animalDict } = require('../emojis.json');
 
 module.exports = {
 	name: 'messageReactionAdd',
@@ -24,14 +24,14 @@ module.exports = {
         console.log(`${reaction.count} user(s) have given the same reaction to this message!`);
 
         const emoji = reaction.emoji.name;
-        if(emoji == '❌' ||emoji == '💩' ||emoji == '☠️' ){
+        if(emoji == '❌' ||emoji == '💩' ||emoji == '☠️' || emoji == '⭕'){
           return;
         }else if(emoji =='👍' || emoji == '❤️' || emoji == '♥️'){
           return;
         }
 
         user = user.tag
-        console.log(reaction.emoji.name);
+        console.log(emoji);
         var { userQuizDict } = require('./../commands/quiz');
         const quizDict = userQuizDict[user]
         if(typeof quizDict === 'undefined'){
@@ -39,9 +39,15 @@ module.exports = {
             return;
         } 
 
-        var animal = quizDict['animal']
-        var answer = animalDict[reaction.emoji.name];
-        if(typeof answer === 'undefined'){
+        
+        if(emoji == '❓' || emoji == '❔'){
+          reaction.message.react(quizDict['emoji']);
+          delete userQuizDict[user];
+          return;
+        }
+        const animal = quizDict['animal']
+        const userAnswer = animalDict[emoji];
+        if(typeof userAnswer === 'undefined'){
             reaction.message.reply('this emoji is not in animal quiz list');
             return;
         }
@@ -50,9 +56,9 @@ module.exports = {
         if(typeof scoreDict === 'undefined'){
             userScoreDict[user] = 0
         }
-        if(answer == animal){
+        if(userAnswer == animal){
           reaction.message.react('⭕');
-          reaction.message.react(reaction.emoji.name);
+          reaction.message.react(emoji);
           userScoreDict[user] += 10;
           reaction.message.reply(user+ ' get a 10 point. Total Point is ' + userScoreDict[user]);
           delete userQuizDict[user];
@@ -66,7 +72,7 @@ module.exports = {
             quizDict["failCnt"] += 1;
           }else{
             reaction.message.react('☠️');
-            reaction.message.reply("answer was : " + animal);
+            reaction.message.react(quizDict['emoji']);
             delete userQuizDict[user];
           }
         }

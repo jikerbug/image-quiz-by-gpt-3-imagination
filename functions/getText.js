@@ -4,48 +4,35 @@ const url = 'https://api.openai.com/v1/completions'
 const { apikey, OrganizationID} = require('../config.json');
 const request = require('request');
 
-const description = `Mark is a famous painter and designer with incredible perception and imagination. create a set of drawings showing random animal in creative and imaginary way and explain it with imaginary description. There is only explanation about extraordinary characteristics.`; 
+const description = `Mark is a famous painter and designer with incredible perception and imagination. Mark likes to design fancy things with animal shapes. He creates a set of drawings showing animal in creative and imaginary way and explain it with imaginary description. There is only explanation about extraordinary characteristics.`; 
 
-const imagineDesignerPromptExampleList=[
-  `Mark designs fancy things.
-  1. duck shaped cutlery set with a bill that is a fork, and eyes that are spoons.
+const designerPromptExampleList =[
+  `1. duck shaped cutlery set with a bill that is a fork, and eyes that are spoons.
   2. lion shaped table with geometric shapes in its mane and fur in arabian tile style.
   3. elephant shaped staircase, a trunk that is more like a spiral staircase, and tusks made of colorful candy
   4. rabbit shaped chandelier, inspired by medieval tapestries.
-  5. owl shaped grandfather clock with big eyes, a beak that looks like it is made of wood, and feathers that are different shades of blue.
+  5. owl shaped bookmark clock with big eyes, a beak that looks like it is made of wood, and feathers that are different shades of blue.
   6. goat shaped spaceship with a beard made of stars and planets, and horns that are spiral galaxies.
   7. blowfish shaped globe with a shell that is a map of the world, and spikes that are countries' flags.
   8. sheep shaped coat with a wool coat that is made of different colors and textures, inspired by painting from the Rennaissance period.
-  9. flamingo shaped perfume that is made entirely of different kinds of flowers.
-  10. snake shaped belt move sinuously, their body undulating in a spiral pattern that creates the illusion of a never-ending M. obius strip.
-  11. `
-]
-
-const designerPromptExampleList =[
-  `Mark degisns fancy things.
-  1. fox shaped kettle, oil on canvas.
-  2. rabbit shaped sculpture, in stained glass style, made of silver.
-  3. cat shaped window, in triangular geometrical style, scribbled with chalk.
+  9. flamingo shaped umbrella that is made entirely of different kinds of flowers.
+  10. otter shaped chess set with a board that is made of water, and pieces that are otters in different positions.
+  11. `, 
+  `1. fox shaped kettle, oil on canvas.
+  2. rabbit shaped chair, made of silver.
+  3. cat shaped balloon, scribbled with chalk.
   4. lion shaped necklace, oil on canvas.
   5. dolphin shaped earring, made of colorful glass.
   6. giraffe shaped car, vector image.
   7. elephant shaped ring, Adobe Illustration Sticker Svg.
-  8. rabbit shaped lego, made of gold.
+  8. rabbit shaped lamp, made of gold.
   9. dog shaped teapot, made of emerald.
-  10. horse shaped papercraft, vector image.
-  11. `,
-  `degisn fanxy things.
-  1. rooster shaped chair, in 3D cube style.
-  2. swan shaped cushion, in faux fur, in pictogram style.
-  3. goat shaped wallet, in zentangle style, made of onyx.
-  4. rooster shaped lamp, in a Tiffany style.
-  5. owl shaped wallclock, in peacock pattern style.
-  6. turkey shaped balloon, in 3D style.
-  7. lizard shaped bookmark, in doodle style.
-  8. duck shaped umbrella, in a surrealistic style, fractal art.
-  9. panda shaped pillow, in pop art style.
   10. snail shaped bottle, made of glass.
-  11. `
+  11. `,
+  `1. otter shaped chess set with a board that is made of water, and pieces that are otters in different positions.
+  2. rhino shaped tank with a horn that is a gun, and armor that is made of different kinds of metal.
+  3. giraffe shaped tower with a neck that is a spiral staircase, and spots that are windows.
+  4. giraffe shaped keyboard with a long neck and big eyes, inspired by ancient sculptures.`
 ]
 
 
@@ -53,10 +40,11 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }  
 
+const talkDescription = '\nMark is a robot who lives on Mars and misses the animals of Earth.\nMark also misses fancy things and cool stuff of the earth.\n'
 
 module.exports = {
   async getTalk(text) {
-    const prompt = description + '\nMark is a robot who lives on Mars and misses the animals of Earth.'+ '\nme: ' + text + '\nMark:'
+    const prompt = description + talkDescription + '\nme: ' + text + '\nMark:'
     const options = {
         headers: {'content-type' : 'application/json', 'Authorization': 'Bearer ' + apikey, 'OpenAI-Organization': OrganizationID},
         url:     url,
@@ -90,7 +78,7 @@ module.exports = {
     })
   },
   async getImagination(animal) {
-    const prompt = description + '\n' + designerPromptExampleList[getRandomInt(1)] + animal;
+    const prompt = description + '\n' + designerPromptExampleList[getRandomInt(2)] + animal;
     console.log(prompt)
     const options = {
         headers: {'content-type' : 'application/json', 'Authorization': 'Bearer ' + apikey, 'OpenAI-Organization': OrganizationID},

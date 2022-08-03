@@ -15,7 +15,7 @@ module.exports = {
   userQuizDict,
   data: new SlashCommandBuilder()
     .setName('quiz')
-    .setDescription('Replies with ai generated animal quiz by drawing it in many different ways')
+    .setDescription('Replies with ai generated animal quiz by drawing it in very creative ways')
                                     ,
   async execute(interaction) {
         console.log(interaction.user.tag)
