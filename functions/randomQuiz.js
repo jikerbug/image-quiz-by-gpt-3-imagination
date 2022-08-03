@@ -12,9 +12,32 @@ animalList = new Set(animalList);
 animalList = [...animalList];
 
 
-const styleList = ['pictogram', 'triangular geometrical', 'doodle', 'abstract',
+// `https://docs.google.com/document/d/1j2IAumYz4iZopOTAAOcCUKbFXP0jHK8mRgD4NLFKkaw/edit`
+// `
+// https://docs.google.com/document/d/17VPu3U2qXthOpt2zWczFvf-AH6z37hxUbvEe1rJTsEc/edit 
+// Fun Ad Libs
+
+// The tree of __________ and __________ 
+// The temple of __________  and __________ 
+// The gateway to __________  and _________
+// The angel of _____ and _______
+// The emperor/empress of __________
+
+// __________ in the style of a 70s science fiction novel cover
+// __________ in the style of a metal album cover
+// __________ in the style of cyberpunk noir art deco 
+// __________ in the style of glitch art
+
+// biblical fantasy illustration of ______
+// an ancient chinese painting of ______
+// wildly futuristic clothing with glowing and colorful decoration
+// –
+// A [size] [type] [creature] made from sticks plastic bits and leaves and colorful threads, concept art
+// `
+const styleList = ['pictogram', 'triangular geometrical', 'doodle', 'abstract', 'matisse', 'retro', 'dreamlike', 'minimalism',
                   '8bit pixel art', 'alien', 'cyberpunk robot', 'stained glass', 'pop art', 'van gogh', 'Art Nouveau posters',
-                  'felt art', 'keith haring', 'lego', 'rectangular geometrical', 'line geometrical', 'ancient Egyptian statues'
+                  'felt art', 'keith haring', 'lego', 'rectangular geometrical', 'line geometrical', 'ancient Egyptian', 'enamel',
+                  'impressionism', 'funk art', 'surreal', 'solarpunk', 'futuristic', 'kandinsky', 'isometric digital art', 'Dalí', '3D',
                 ]
 const objectList = ['car', 'kettle', 'earring', 'teapot', 'papercraft', 'ring', 'necklace',
                   'bottle'

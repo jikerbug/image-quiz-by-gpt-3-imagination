@@ -2,7 +2,6 @@
     "animalDict":{
         "🐶" : "dog",
         "🐱": "cat",
-        "🐹": "hamster",
         "🐰": "rabbit",
         "🦊": "fox",
         "🐻": "bear",
@@ -34,14 +33,12 @@
         "🐺": "wolf",
         "🐗": "boar",
         "🐴": "horse",
-        "🦄": "unicorn",
         "🐌": "snail",
         "🐢": "turtle",
         "🐍": "snake",
         "🦎": "lizard",
         "🐡": "blowfish",
         "🐠": "tropical fish",
-        "🐟": "fish",
         "🐬": "dolphin",
         "🐳": "whale",
         "🐋": "whale",
@@ -52,7 +49,6 @@
         "🦓": "zebra",
         "🦍": "gorilla",
         "🦧": "orangutan",
-        "🦣": "mammoth",
         "🐘": "elephant",
         "🦬": "bison",
         "🦛": "hippo",
@@ -91,7 +87,6 @@
         "🦫": "beaver",
         "🦦": "otter", 
         "🦥": "sloth",
-        "🐿": "chipmonk",
         "🦔": "hedgehog"
      }
 }

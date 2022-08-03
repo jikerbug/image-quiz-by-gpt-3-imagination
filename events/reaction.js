@@ -23,19 +23,26 @@ module.exports = {
         // The reaction is now also fully available and the properties will be reflected accurately:
         console.log(`${reaction.count} user(s) have given the same reaction to this message!`);
 
+        const emoji = reaction.emoji.name;
+        if(emoji == '❌' ||emoji == '💩' ||emoji == '☠️' ){
+          return;
+        }else if(emoji =='👍' || emoji == '❤️' || emoji == '♥️'){
+          return;
+        }
+
         user = user.tag
         console.log(reaction.emoji.name);
         var { userQuizDict } = require('./../commands/quiz');
         const quizDict = userQuizDict[user]
         if(typeof quizDict === 'undefined'){
-            reaction.message.reply('get Qussiz First!!');
+            reaction.message.reply('get new Quiz First!!');
             return;
         } 
 
         var animal = quizDict['animal']
         var answer = animalDict[reaction.emoji.name];
         if(typeof answer === 'undefined'){
-            reaction.message.reply('error input');
+            reaction.message.reply('this emoji is not in animal quiz list');
             return;
         }
         var { userScoreDict } = require('./../functions/score');
@@ -47,7 +54,8 @@ module.exports = {
           reaction.message.react('⭕');
           reaction.message.react(reaction.emoji.name);
           userScoreDict[user] += 10;
-          reaction.message.reply(user+ ' get a 10 point. Total Point is ' + userScoreDict[user])
+          reaction.message.reply(user+ ' get a 10 point. Total Point is ' + userScoreDict[user]);
+          delete userQuizDict[user];
         }else{
           let failCnt =  quizDict["failCnt"];
           if(failCnt == 0){
